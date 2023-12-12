@@ -58,7 +58,7 @@ fun main() {
 //    list 처럼, count, in 함수들이 존재함
     println("is ${fruit} contains \"apple\"? ${"apple" in fruit}")
     println("is ${fruit} contains \"apple\"? ${fruit.contains("apple")}")
-    println("is ${fruit} contains \"apple\"? ${fruit.count()}")
-    println("is ${fruit} contains \"apple\"? ${fruit.count { it.startsWith("a") }}")
+    println("how many items ${fruit} has? ${fruit.count()}")
+    println("is ${fruit} contains fruit start with a? ${fruit.count { it.startsWith("a") }}")
 
 }
