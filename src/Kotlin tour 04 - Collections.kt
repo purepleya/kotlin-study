@@ -9,6 +9,8 @@ fun main() {
 //    read only list(List)는 listOf() 함수로 만들고
 //    mutable list(MutableList)는 mutableListOf() 함수로 만든다.
 
+//    List를 선언할때 타입을 명시하지 않으면 값으로 타입을 추론하고, 명시하고 싶을때는 <타입>을 붙여준다.
+
     val readOnlyShapes = listOf("triangle", "square", "circle")
 //    read only list는 수정 함수가 없다.
     println(readOnlyShapes)
@@ -35,5 +37,28 @@ fun main() {
 
 //    어떤 원소를 포함하는지 확인하고 싶으면 in 함수를 사용한다.
     println("is ${readOnlyShapes3} contains \"triangle\"? ${"triangle" in readOnlyShapes3}")
+
+
+
+//    Set
+//    read only set(Set)은 setOf() 함수로 만들고,
+//    mutable set(MutableSet)을 만들때는 mutableSetOf() 함수로 만든다.
+//    sets을 생성할대 저장되는 item을 보고 타입을 추론하기도 하며, 특정 타입을 명시적으로 선언 하고 싶을때는 <> 괄호를 이용한다.
+
+    // Read-only set
+    val readOnlyFruit = setOf("apple", "banana", "cherry", "cherry")
+    println("readOnlyFruit = ${readOnlyFruit}")
+
+    // 명시적 타입 선언 Mutable set, add, remove 와 같은 수정 함수가 존재함.
+    val fruit: MutableSet<String> = mutableSetOf("apple", "banana", "cherry", "cherry")
+    fruit.add("orange")
+    fruit.remove("apple")
+    println("fruit = ${fruit}")
+
+//    list 처럼, count, in 함수들이 존재함
+    println("is ${fruit} contains \"apple\"? ${"apple" in fruit}")
+    println("is ${fruit} contains \"apple\"? ${fruit.contains("apple")}")
+    println("is ${fruit} contains \"apple\"? ${fruit.count()}")
+    println("is ${fruit} contains \"apple\"? ${fruit.count { it.startsWith("a") }}")
 
 }
