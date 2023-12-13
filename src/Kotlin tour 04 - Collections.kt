@@ -39,7 +39,7 @@ fun main() {
     println("is ${readOnlyShapes3} contains \"triangle\"? ${"triangle" in readOnlyShapes3}")
 
 
-
+    println("=====================================")
 //    Set
 //    read only set(Set)은 setOf() 함수로 만들고,
 //    mutable set(MutableSet)을 만들때는 mutableSetOf() 함수로 만든다.
@@ -60,5 +60,46 @@ fun main() {
     println("is ${fruit} contains \"apple\"? ${fruit.contains("apple")}")
     println("how many items ${fruit} has? ${fruit.count()}")
     println("is ${fruit} contains fruit start with a? ${fruit.count { it.startsWith("a") }}")
+
+
+    println("=====================================")
+//    Map
+//    Map은 key-value 쌍으로 이루어지고, key를 통해 값에 접근 한다. key는 unique 해야 한다.
+
+//    read only map(Map)은 mapOf() 함수로 만들고,
+//    mutable map (MutableMap)은 mutableMapOf() 함수를 이용해 만든다.
+
+//    다른 Collection 과 마찬가지로 저장되는 아이템으로 타입을 유추하고, 명시적으로 선언하고 싶을때는 <> 괄호에 키와 값의 타입을 명시한다.
+
+//    Read-only map
+    val readOnlyJuiceMenu = mapOf("apple" to 100, "kiwi" to 190, "orange" to 100)
+    println("readOnlyJuiceMenu = ${readOnlyJuiceMenu}")
+
+// Mutable map with explicit type declaration
+    val juiceMenu: MutableMap<String, Int> = mutableMapOf("apple" to 100, "kiwi" to 190, "orange" to 100)
+    println("mutableJuiceMenu = ${juiceMenu}")
+
+//    Mutable map을 read only map으로 바꾸고 싶다면, toMap() 함수를 사용하거나, Map 변수에 할당해서 casting을 해주면 된다.
+    val readOnlyJuiceMenu2 = juiceMenu.toMap()
+    val readOnlyJuiceMenu3: Map<String, Int> = juiceMenu
+
+//    원소에 접근할 때는 get() 함수를 사용하거나, []를 사용하면 된다.
+    println("price of apple is ${juiceMenu.get("apple")}")
+    println("price of kiwi is ${juiceMenu["kiwi"]}")
+
+//    mutable map 에는 put, remove, clear 와 같은 수정 함수가 존재하고, key가 존재하는지 확인하기 위해 containsKey 함수를 사용한다.
+    val mutableJuiceMenu: MutableMap<String, Int> = mutableMapOf("apple" to 100, "kiwi" to 190, "orange" to 100)
+    mutableJuiceMenu.put("banana", 200)
+    println("put banana ${mutableJuiceMenu}")
+
+    mutableJuiceMenu.remove("apple")
+    println("remove apple ${mutableJuiceMenu}")
+
+    println("is ${mutableJuiceMenu} contains key \"apple\"? ${mutableJuiceMenu.containsKey("apple")}")
+
+    mutableJuiceMenu.clear()
+    println("clear mutableJuiceMenu ${mutableJuiceMenu}")
+
+
 
 }
