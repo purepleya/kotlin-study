@@ -76,6 +76,39 @@ fun main() {
     }
 
 
+//    반복문은 for, while 을 이용해 작성한다.
+
+//    for 문은 () 괄호 안에 반복자의 range를 in 키워드를 이용해 작성한다
+    for (i in 1..5) {
+        println("For loop 1 to 5 : $i")
+    }
+
+//    range 대신 Collection 을 사용할 수도 있다.
+    val list = listOf("Hello", "World", "!")
+    for (str in list) {
+        println("For loop list : $str")
+    }
 
 
+//    while은 두가지 방법으로 사용 가능하다.
+//    조건이 참일 경우 코드를 실행하는 방법 (while)
+//    코드를 먼저 실행하고 조건을 확인하는 방법 (do-while)
+
+//    첫번째 케이스의 경우(while):
+//    반복문을 실행하기 위한 조건을 () 괄호 안에 작성한다.
+//    실행 코드를 {} 괄호 안에 작성한다.
+    var i = 0
+    while (i < 5) {
+        println("While loop : $i")
+        i++
+    }
+
+//    두번째 케이스의 경우(do-while):
+//    실행 코드를 do 키워드를 이용해서 먼저 작성하고
+//    반복문을 실행하기 위한 조건을 while 키워드를 이용해서 작성한다.
+    i = 0
+    do {
+        println("Do-While loop : $i")
+        i++
+    } while (i < 5)
 }
