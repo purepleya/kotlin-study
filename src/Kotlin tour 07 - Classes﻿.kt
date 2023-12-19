@@ -24,6 +24,32 @@ class Customer2 (var name: String, val email: String) {
     }
 }
 
+
+// Data classes
+// kotlin은 데이터를 저장하는 클래스를 만들 때, data class 를 사용한다.
+// data class는 일반 클래스와 기능적으로 똑같지만 가독성 좋은 출력물이나, 비교, 복사 와 같은 몇가지 추가적인 기능을 제공한다.
+// data class 는 아래와 같이 선언한다.
+// data class User(val name: String, val age: Int)
+
+// data class의 유용한 기능으로는 아래와 같은 함수들이 있다.
+// toString(), equals(), hashCode(), copy()
+
+//class를 가독성 있게 인쇄 하고 싶다면 .toString() 함수의 결과를 print 하거나,
+//그냥 print 함수에 인스턴스를 넘겨서 자동으로 .toString() 함수가 실행되도록 할 수도 있다.
+//val user = User("Alex", 1)
+//prtinln(user)
+
+// data class 는 == 와 같은 연산자를 사용해서 인스턴스를 비교할 수 있다.
+//val user1 = User("Alex", 1)
+//val user2 = User("Alex", 1)
+//println(user1 == user2) // true
+
+// data class 는 .copy() 함수를 사용해서 인스턴스를 복사할 수 있다.
+//val jack = User(name = "Jack", age = 1)
+//val olderJack = jack.copy(age = 2)
+
+
+
 fun main() {
     val customer = Customer("John Doe", "john@email.com")
 
