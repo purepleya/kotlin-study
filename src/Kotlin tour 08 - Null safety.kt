@@ -37,3 +37,34 @@
 //println(strLength(nullable))  // 컴파일 에러
 
 
+
+// Check for null values
+// null 값이 할당 될 수 있는 변수는 if 문을 사용해서 null 값 체크를 해야 한다.
+
+//fun describeString(maybeString: String?): String {
+//    if (maybeString != null && maybeString.length > 0) { // null 체크
+//        return "String of length ${maybeString.length}"
+//    } else {
+//        return "Empty or null string"
+//    }
+//}
+
+
+
+// Use safe calls
+// null 값이 할당 될 수 있는 object의 함수를 실행시킬때 ?. 연산자를 이용한다.
+// ?. 연산자는 null 값이 아닌 경우에만 함수를 실행시켜서 null pointer exception을 방지한다.
+
+//fun lengthString(maybeString: String?): Int? {
+//    return maybeString?.length // null 이면 null을 리턴
+//}
+
+
+// Use Elvis operator
+// ?: 연산자를 사용하면 null 값이면 다른 값을 할당 할 수 있다.
+
+//fun lengthString(maybeString: String?): Int {
+//    val length = maybeString?.length ?: 0 // null 이면 0을 할당
+//    return length
+//}
+
