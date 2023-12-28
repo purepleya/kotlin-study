@@ -64,7 +64,7 @@ fun incrementX() {
 // class 선언과 인스턴스 만들기
 // 클래스 선언은 class 키워드로 시작한다.
 // 속성 들은 클래스 선언 부나 본문에 작성 된다.
-class Rectangle(val height: Int, val width: Int) {
+class Rectangle(val height: Int, var width: Int) {
     val perimeter = (height + width) * 2
 }
 
