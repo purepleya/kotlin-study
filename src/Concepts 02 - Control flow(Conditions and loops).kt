@@ -1,10 +1,11 @@
-import com.sun.net.httpserver.Request
-
 fun main(args: Array<String>) {
 //    ifExpression()
 //    ifExpression2()
 //    whenExpression()
-    whenExpression5()
+//    whenExpression5()
+//    basicForSyntex()
+//    forArray()
+    whileLoop()
 }
 
 fun ifExpression() {
@@ -127,3 +128,43 @@ fun whenExpression6(x: Any) = when(x) {
 //    is Success -> response.body
 //    is HttpError -> throw HttpException(response.status)
 //}
+
+fun basicForSyntex() {
+    val items = listOf("apple", "banana", "kiwi")
+
+    for (item in items) println(item)
+
+    // 코드 부분을 블록으로 감싸서 사용할 수 있다.
+    for (item in items) {
+        println("item is $item")
+    }
+}
+
+
+fun forArray() {
+    val items = listOf("apple", "banana", "kiwi")
+
+    for (index in items.indices) {
+        println("item at $index is ${items[index]}")
+    }
+
+    for ((index, value) in items.withIndex()) {
+        println("the element at $index is $value")
+    }
+}
+
+fun whileLoop() {
+val items = listOf("apple", "banana", "kiwi")
+
+var index = 0
+while (index < items.size) {
+    println("item at $index is ${items[index]}")
+    index++
+}
+
+var executeCount = 1
+do {
+    println("this is ${executeCount}th do-while loop")
+    executeCount++
+} while (executeCount < 2)
+}
