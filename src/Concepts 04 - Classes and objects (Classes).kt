@@ -32,6 +32,53 @@ class PropertyDemo (
 ) {
 }
 
+
+class SecondaryConstructorDemo {
+    constructor(name: String) {
+        println("constructor with $name")
+    }
+}
+
+
+class SecondaryConstructorDemo2 (name: String) {
+
+//    primary constructor 와 중복되어 에러 발생
+//    constructor(name: String): this(name) {
+//        println("constructor")
+//    }
+
+//    primary constructor를 호출하지 않아서 에러 발생
+//    constructor(name: String, age: Int) {
+//        println("constructor")
+//    }
+
+
+//    정상 케이스
+    constructor(name: String, age: Int): this(name) {
+        println("constructor")
+    }
+}
+
+
+class Constructors {
+    init {
+        println("Init block")
+    }
+
+    constructor(i: Int) {
+        println("Constructor")
+    }
+
+    init {
+        println("Init block2")
+    }
+}
+
+class SingletonDemo private constructor() {
+    /* ... */
+}
+
+
 fun main() {
 //    val initOrderDemo = InitOrderDemo("hello")
 //    ==========================================
@@ -40,11 +87,18 @@ fun main() {
 //    Second property: 5
 //    Second initializer block that prints 5
 
-    val propertyDemo = PropertyDemo("JH", 45, "male")
-    println(propertyDemo.name)
-    println(propertyDemo.age)
+//    val propertyDemo = PropertyDemo("JH", 45, "male")
+//    println(propertyDemo.name)
+//    println(propertyDemo.age)
 //    println(propertyDemo.gender) // gender 속성은 없음
 //    ==========================================
 //    JH
 //    45
+
+
+    var constructors = Constructors(1)
+//    ==========================================
+//    Init block
+//    Init block2
+//    Constructor
 }
