@@ -65,13 +65,74 @@ class OverrideDerived2 : OverrideDerived() {
 //    }
 }
 
+open class SuperClassDemoBase {
+    val v get() = "SuperClassDemoBase value"
+    open fun f() {
+        println("SuperClassDemoBase f()")
+    }
+}
+
+class SuperClassDemoDerived : SuperClassDemoBase() {
+    override fun f() {
+        super.f()
+        println("SuperClassDemoDerived f()")
+    }
+
+    val v2 get() = "SuperClassDemoDerived value ${super.v}"
+
+    inner class SuperClassDemoDerivedInner {
+        fun callF() {
+            super@SuperClassDemoDerived.f()
+            f()
+            println("SuperClassDemoDerivedInner callF()")
+        }
+    }
+}
+
+open class Rectangle {
+    open fun draw() {
+        println("Drawing a rectangle")
+    }
+}
+
+interface Polygon {
+    fun draw() {
+        println("Drawing a polygon")
+    }
+}
+
+class Square : Rectangle(), Polygon {
+    // draw()는 Rectangle, Polygon양쪽에 있기때문에 override 하지 않으면 컴파일 에러 발생
+    override fun draw() {
+        // 어떤 상위 클래스의 draw() 를 호출할지 지정해야 한다.
+        super<Rectangle>.draw()
+        super<Polygon>.draw()
+    }
+}
+
+
+
 fun main() {
-    val a = Derived(10)
+//    val a = Derived(10)
 //    Base class init block 10
 //    Derived class init block 10
 
-    val b = Derived2(5)
+//    val b = Derived2(5)
 //    Base class init block 5
 //    Derived2 class init block 5
 
+    val s = SuperClassDemoDerived()
+    s.f()
+//    SuperClassDemoBase f()
+//    SuperClassDemoDerived f()
+
+    println(s.v2)
+//    SuperClassDemoDerived value SuperClassDemoBase value
+
+    val i = s.SuperClassDemoDerivedInner()
+    i.callF()
+//    SuperClassDemoBase f()
+//    SuperClassDemoBase f()
+//    SuperClassDemoDerived f()
+//    SuperClassDemoDerivedInner callF()
 }
