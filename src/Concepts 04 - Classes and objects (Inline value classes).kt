@@ -32,6 +32,15 @@ value class Name(val s: String) : Printable {
 
 
 
+typealias NameTypeAlias = String
+
+@JvmInline
+value class NameInlineClass(val s: String)
+
+fun acceptString(s: String) = println("acceptString : ${s}")
+fun acceptNameTypeAlias(s: NameTypeAlias) = println("acceptNameTypeAlias : ${s}")
+fun acceptNameInlineClass(s: NameInlineClass) = println("acceptNameInlineClass : ${s.s}")
+
 
 fun main() {
 //    val name1 = PersonInline("Kotlin", "Mascot")
@@ -43,6 +52,22 @@ fun main() {
 //    println(name2.length)
 //    // 5
 
-    val name = Name("Kotlin")
-    println(name.prettyPrint())
+//    val name = Name("Kotlin")
+//    println(name.prettyPrint())
+
+    val nameAlias: NameTypeAlias = "a"
+    val nameInlineClass: NameInlineClass = NameInlineClass("b")
+    val string: String = "c"
+
+    acceptString(string)
+    acceptString(nameAlias)
+//    acceptString(nameInlineClass) // compile error - 호환 불가
+
+    acceptNameTypeAlias(string)
+    acceptNameTypeAlias(nameAlias)
+//    acceptNameTypeAlias(nameInlineClass)  // compile error  - 호환 불가
+
+//    acceptNameInlineClass(string)  // compile error  - 호환 불가
+//    acceptNameInlineClass(nameAlias)  // compile error  - 호환 불가
+    acceptNameInlineClass(nameInlineClass)
 }
