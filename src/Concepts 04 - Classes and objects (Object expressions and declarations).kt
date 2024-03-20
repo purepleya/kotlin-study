@@ -55,12 +55,23 @@ class AnonymousC {
 
 }
 
+data object MyDataObject {
+    val x: Int = 3
+}
+
+data class MyDataClass (val x:Int = 3) {
+    var y: Int = 4
+}
 
 
 fun main() {
 //    println(helloWorld)
-    val c = AnonymousObjectAsReturn();
-    c.printX();
+//    val c = AnonymousObjectAsReturn();
+//    c.printX();
 
+//    println(MyDataObject) // MyDataObject
 
+    val x = MyDataClass()
+
+    println(x.component1())
 }
