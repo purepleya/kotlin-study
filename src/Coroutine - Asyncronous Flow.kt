@@ -1,9 +1,5 @@
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withTimeoutOrNull
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 
 
 fun simple(): Sequence<Int> = sequence { // sequence builder
@@ -23,6 +19,23 @@ fun simpleFlow(): Flow<Int> = flow { // flow builder
 }
 
 
+suspend fun performRequest(request: Int): String {
+    delay(2000) // imitate long-running asynchronous work
+    return "response $request"
+}
+
+fun numbers(): Flow<Int> = flow {
+    try {
+        emit(1)
+        emit(2)
+        println("This line will not execute")
+        emit(3)
+    } catch (e: Exception) {
+        println("Caught exception ${e.message}")
+    } finally {
+        println("Finally in numbers")
+    }
+}
 
 
 fun main() {
@@ -36,16 +49,29 @@ fun main() {
 //        }
 //        simpleFlow().collect { value -> println(value) }
 
-        val flow = simpleFlow()
-        println("Calling simpleFlow...")
-        flow.collect { value -> println(value) }
-        println("Call collect again...")
-        flow.collect { value -> println(value) }
+//        val flow = simpleFlow()
+//        println("Calling simpleFlow...")
+//        flow.collect { value -> println(value) }
+//        println("Call collect again...")
+//        flow.collect { value -> println(value) }
+//
+//        withTimeoutOrNull(250) {
+//            simple().forEach { value -> println(value) }
+//        }
 
-        withTimeoutOrNull(250) {
-            simple().forEach { value -> println(value) }
-        }
+//        (1..3).asFlow()
+////            .map {request -> performRequest(request) }
+//            .transform { request ->
+//                emit("Making request $request")
+//                emit(performRequest(request))
+//            }
+//            .collect { response -> println(response) }
+
+        numbers()
+            .take(2)
+            .collect { println(it) }
+
+
     }
-
 
 }
