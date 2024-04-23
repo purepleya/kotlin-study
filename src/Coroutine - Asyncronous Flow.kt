@@ -14,6 +14,7 @@ fun simpleFlow(): Flow<Int> = flow { // flow builder
 
     for (i in 1..3) {
         delay(100) // pretend we are doing something useful here
+        println("[${Thread.currentThread().name}, ${currentCoroutineContext()}] simpleFlow: $i")
         emit(i) // emit next value
     }
 }
@@ -67,10 +68,16 @@ fun main() {
 //            }
 //            .collect { response -> println(response) }
 
-        numbers()
-            .take(2)
-            .collect { println(it) }
+//        numbers()
+//            .take(2)
+//            .collect { println(it) }
 
+        simpleFlow()
+            .buffer()
+            .collect { value ->
+                delay(300)
+                println("[${Thread.currentThread().name}, ${currentCoroutineContext()}] Collected $value")
+            }
 
     }
 
