@@ -1,5 +1,6 @@
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
+import java.time.LocalDateTime
 
 
 fun simple(): Sequence<Int> = sequence { // sequence builder
@@ -10,11 +11,11 @@ fun simple(): Sequence<Int> = sequence { // sequence builder
 }
 
 fun simpleFlow(): Flow<Int> = flow { // flow builder
-    println("Flow started")
+    println("${LocalDateTime.now()} Flow started")
 
-    for (i in 1..3) {
+    for (i in 1..5) {
         delay(100) // pretend we are doing something useful here
-        println("[${Thread.currentThread().name}, ${currentCoroutineContext()}] simpleFlow: $i")
+        println("${LocalDateTime.now()} [${Thread.currentThread().name}, ${currentCoroutineContext()}] simpleFlow: $i")
         emit(i) // emit next value
     }
 }
@@ -72,13 +73,24 @@ fun main() {
 //            .take(2)
 //            .collect { println(it) }
 
+//        simpleFlow()
+////            .buffer()
+//            .conflate()
+//            .collect { value ->
+//                delay(300)
+//                println("${LocalDateTime.now()} [${Thread.currentThread().name}, ${currentCoroutineContext()}] Collected $value")
+//            }
+
         simpleFlow()
-            .buffer()
-            .collect { value ->
-                delay(300)
-                println("[${Thread.currentThread().name}, ${currentCoroutineContext()}] Collected $value")
+            .collectLatest { value ->
+                try {
+                    println("${LocalDateTime.now()} [${Thread.currentThread().name}, ${currentCoroutineContext()}] Collected $value")
+                    delay(300)
+                    println("${LocalDateTime.now()} [${Thread.currentThread().name}, ${currentCoroutineContext()}] Done $value")
+                } catch (e: Exception) {
+                    println("${LocalDateTime.now()} [${Thread.currentThread().name}, ${currentCoroutineContext()}] Exception $e")
+                }
             }
 
     }
-
 }
