@@ -109,13 +109,30 @@ fun main() {
 //                println("$value at ${System.currentTimeMillis() - startTime} ms from start")
 //            }
 
-        val startTime = System.currentTimeMillis()
-        (1..3).asFlow().onEach { delay(600) }
-//            .flatMapConcat { requestFlow(it) }
-            .flatMapMerge { requestFlow(it) }
-            .collect { response ->
-                println("$response at ${System.currentTimeMillis() - startTime} ms from start")
-            }
+//        val startTime = System.currentTimeMillis()
+//        (1..3).asFlow().onEach { delay(600) }
+////            .flatMapConcat { requestFlow(it) }
+//            .flatMapMerge { requestFlow(it) }
+//            .collect { response ->
+//                println("$response at ${System.currentTimeMillis() - startTime} ms from start")
+//            }
 
+        try {
+            simple2().collect { value ->
+                println(value)
+                check(value <= 1) { "Collected $value" }
+            }
+        } catch (e: Throwable) {
+            println("Caught $e")
+        }
+
+    }
+}
+
+
+fun simple2(): Flow<Int> = flow {
+    for(i in 1..3) {
+        println("Emitting $i")
+        emit(i)
     }
 }
